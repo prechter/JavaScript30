@@ -82,7 +82,7 @@
     </div>
     <div class="item">
       <input type="checkbox">
-      <p>Try do it with out any libraries</p>
+      <p>Try to do it without any libraries</p>
     </div>
     <div class="item">
       <input type="checkbox">
@@ -98,7 +98,41 @@
     </div>
   </div>
 
-<script>
-</script>
+  <script>
+    // const checkButtons = document.querySelectorAll('input');
+    const checkButtons = document.querySelectorAll('.inbox input[type="checkbox"]');
+
+    let lastChecked;
+
+    function handleCheck(e) {
+      // console.log(e)
+      //check if they had the shift key down
+      //AND check that they are checking it
+      let inBetween = false;
+      if(e.shiftKey && this.checked) {
+        //loop over every single checkbutton
+        checkButtons.forEach(checkButton => {
+          console.log(checkButton)
+          if(checkButton === this || checkButton === lastChecked) {
+            inBetween = !inBetween;
+            // console.log('Starting to check them in between!')
+          }
+          if(inBetween) {
+            checkButton.checked = true;
+          }
+        });
+      }
+      lastChecked = this;
+    }
+
+    checkButtons.forEach(checkButtons => checkButtons.addEventListener('click', handleCheck));
+
+
+
+    // checkButton.addEventListener('click', function(e) {
+    //   console.log(e)
+    //   // if(e.shiftKey = true)
+    // })
+  </script>
 </body>
 </html>
